@@ -1,4 +1,4 @@
-# Recommended repository template for UCLA ECEM202A / CSM213A projects.
+# Repository template for ECEM202A/CSM213A projects
 
 Structure overview
 
@@ -8,7 +8,10 @@ Structure overview
 
 You may add additional files and folders as necessary.
 
-The doc/ folder has a simple GitHub Pages website template using markdown, but you can put any static html content there. GitHub Pages looks for index.html as the root file for the website and if that is not found then index.md, and then README.md. Jekyll (the static site generator used by GitHub Pages) will convert markdown content into html. Please update docs/\_config.yml with your project's title and description.
+The doc/ folder has a simple *starter template* for a GitHub Pages website using markdown. However, you can put any static html content there, including files for a website you may have prepared elsewhere. GitHub Pages looks for index.html as the root file for the website and if that is not found then index.md, and then README.md. Jekyll (the static site generator used by GitHub Pages) will convert markdown content into html.
+
+
+Please update docs/\_config.yml with your project's metadata such as title and description.
 
 ✅ Expectations for a Strong Project Website
 * Introduction: Clear motivation, context, and goals.
@@ -21,6 +24,7 @@ The doc/ folder has a simple GitHub Pages website template using markdown, but y
 
 Your website is your final report – treat it like a conference-style project writeup, but more visual and accessible.
 
+
 ===========================================
 
 Guidelines for a Strong Project Website
@@ -32,11 +36,11 @@ Guidelines for a Strong Project Website
 1. Include Figures & Visuals Liberally
 
 Every major section should have at least one figure:
-	•	Architecture diagram
-	•	Data pipeline
-	•	Example outputs
-	•	Evaluation plots
-	•	Comparative charts
+* Architecture diagram
+* Data pipeline
+* Example outputs
+* Evaluation plots
+* Comparative charts
 
 Projects with few or no visuals will feel incomplete.
 
@@ -57,20 +61,20 @@ Every major section should have 3–5 subsections.
 4. Provide reproducibility
 
 Include:
-	•	Hyperlinks to datasets
-	•	Clear algorithm descriptions
-	•	Parameters and configuration details
-	•	Implementation notes
+* Hyperlinks to datasets
+* Clear algorithm descriptions
+* Parameters and configuration details
+* Implementation notes
 
 ⸻
 
 5. Present results professionally
 
 Figures must:
-	•	Have readable labels
-	•	Use consistent color palettes
-	•	Include units and legends
-	•	Provide captions explaining what the figure shows
+* Have readable labels
+* Use consistent color palettes
+* Include units and legends
+* Provide captions explaining what the figure shows
 
 ⸻
 
