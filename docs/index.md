@@ -1,35 +1,27 @@
 ---
 layout: default
-title: "Project Title"
+title: "Odyssey: A Context-Aware JITAI Hydration Assistant"
 ---
 
-# **Project Title**
+# **Odyssey: A Context-Aware JITAI Hydration Assistant**
 
-*A concise, descriptive title for your project.*
+*A system integrating edge audio sensing (Nicla Voice), BLE streaming, and an iOS LLM-powered reasoning layer to deliver intelligent, context-appropriate hydration reminders.*
 
 ![Project Banner](./assets/img/banner-placeholder.png)  
-<sub>*(Optional: Replace with a conceptual figure or meaningful image.)*</sub>
+<sub>*Replace with a system architecture or app screenshot.*</sub>
 
 ---
 
 ## 👥 **Team**
 
-- Student Name #1 (email, GitHub)  
-- Student Name #2 *(delete if not applicable)*  
-- Student Name #3 *(delete if not applicable)*  
+- Assia Li (UCLA)  
+- *(Add team members if applicable)*
 
 ---
 
 ## 📝 **Abstract**
 
-Provide a short paragraph (4–6 sentences) summarizing:
-
-- The problem you addressed  
-- Your approach  
-- Key results  
-- The significance of your findings  
-
-This should be a standalone “TL;DR” of your project.
+We introduce **Odyssey**, a context-aware JITAI (Just-In-Time Adaptive Intervention) system that delivers hydration reminders only at optimal, non-disruptive moments. The system combines **edge audio classification** on an Arduino Nicla Voice, **BLE streaming** of environmental context, and a **SwiftUI iOS app** running a local/remote LLM reasoning layer. Odyssey integrates calendar availability, hydration history, BLE-based activity detection (keyboard typing, running faucet, background noise), and prompt history to infer *interruptibility* and determine whether **now is the right moment for a hydration reminder**. Our results demonstrate low-latency sensing-to-intervention, high classification reliability for simple environmental cues, and promising early behavior-aligned timing. The project shows how lightweight sensing + LLM reasoning can enable respectful, user-aware intervention systems.
 
 ---
 
@@ -37,116 +29,216 @@ This should be a standalone “TL;DR” of your project.
 
 - [Midterm Checkpoint Slides](http://)  
 - [Final Presentation Slides](http://)
-- If Needed: Links to have any videos demonstrating your project
 
 ---
 
-> Delete this section if you have no videos.
-
 ## 🎛️ **Media**
 
-- Links to any video or audio recordings demonstrating your project
+- Demo Video (optional)  
+- Model training or BLE streaming demonstration (optional)
 
 ---
 
 # **1. Introduction**
 
-Use the introduction to clearly set context, describe motivation, and explain the central idea behind your project.
+Hydration apps usually rely on **fixed timers**, ignoring what the user is actually doing. Reminding someone who is in a meeting or deep flow state can be counterproductive. This project seeks to redesign hydration prompting through a **JITAI framework**, delivering interventions that are:
 
-### **1.1 Motivation & Objective**  
-What are you trying to do and why is it important? Explain in accessible, non-jargon terms.
+- context-aware,  
+- break-aligned,  
+- low-disruption,  
+- personalized to the user’s schedule and habits.
 
-### **1.2 State of the Art & Its Limitations**  
-How is this problem addressed today?  
-What gaps or limitations exist?  
-Cite prior work using a consistent style like [Smith21].
+## **1.1 Motivation & Objective**
 
-### **1.3 Novelty & Rationale**  
-What is new about your approach, and why do you expect it to succeed?
+Our core objective is to build a **hydration assistant that actually pays attention**—to the user’s activity, schedule, and context—before interrupting them. By using embedded sensing (keyboard → working; faucet → break), calendar awareness, and hydration status, Odyssey determines the *best* moments to remind users to drink water.
 
-### **1.4 Potential Impact**  
-If successful, what technical or broader impact could this project have?
+## **1.2 State of the Art & Limitations**
 
-### **1.5 Challenges**  
-List the main technical, practical, or methodological challenges.
+Traditional health apps:  
+- Use fixed reminders  
+- Don't incorporate context or interruptibility  
+- Rarely integrate multimodal signals  
 
-### **1.6 Metrics of Success**  
-What are the specific, measurable criteria for evaluating your project?
+Prior JITAI research shows the importance of timing interventions with user state, but full **hardware-to-LLM pipelines** integrating sensing + scheduling remain unexplored.
+
+## **1.3 Novelty & Rationale**
+
+Our system is novel because it integrates:  
+- **Edge ML audio sensing** for environmental context  
+- **BLE real-time event streaming**  
+- **Calendar-aware LLM reasoning**  
+- **A unified iOS multi-tab architecture**  
+
+This enables *precision prompting* aligned with behavioral intervention theory.
+
+## **1.4 Potential Impact**
+
+This architecture could generalize to:  
+- ergonomic/posture JITAIs  
+- micro-break encouragement  
+- digital well-being interventions  
+- adaptive VR/AR safety systems  
+
+## **1.5 Challenges**
+
+- BLE latency and reliability  
+- Edge model accuracy in noisy environments  
+- Designing interpretable, rule-based JITAI logic  
+- Integrating LLM reasoning safely and consistently  
+
+## **1.6 Metrics of Success**
+
+- Edge classification accuracy  
+- BLE latency (sensor → phone → decision)  
+- % prompts delivered during “appropriate context”  
+- Reduction of disruptive prompts  
+- Usability & alignment with user behavior  
 
 ---
 
 # **2. Related Work**
 
-Summarize prior works relevant to your project.  
-For each: what did the authors do, how is it related, and what gap remains?
+Relevant domains include:
 
-Reference all citations in **Section 6**.
+- **JITAI Frameworks** – timing interventions based on user state and context  
+- **Context-aware mobile computing** – detecting interruptibility using sensors  
+- **On-device ML (TinyML)** – efficient edge classification models  
+- **LLM-based personal assistants** – reasoning over schedules and user habits  
+
+Gaps we address:
+
+- Lack of **low-power multimodal sensing** integrated with LLM reasoning  
+- Lack of **BLE-to-LLM pipeline** for real-time adaptive interventions  
+- Limited exploration of **environmental audio** as a proxy for interruptibility  
 
 ---
 
 # **3. Technical Approach**
 
-Describe your system, methodology, algorithms, and design choices.  
-Use figures generously:
+## **3.1 System Architecture**
 
-- System architecture diagram  
-- Data pipeline  
-- Algorithm/model block diagram  
-- Hardware setup photos  
+A three-layer architecture:
 
-💡 Tip: Add images, diagrams, and code snippets. Make your system reproducible.
+1. **Edge Layer – Nicla Voice**
+   - TinyML model classifies: `keyboard`, `faucet`, `background`
+   - Sends events via BLE
 
-Recommended subsections:
+2. **Context Layer – Odyssey iOS App**
+   - Tabs: AI Chat, Events, Calendar, Hydration  
+   - Shared services: `HydrationService`, `ContextService`, `CalendarService`
 
-### **3.1 System Architecture**
-Include a block diagram or pipeline figure.
+3. **Decision Layer – JITAI Engine + LLM**
+   - Evaluates context  
+   - Computes hydration need  
+   - Determines whether to prompt  
 
-### **3.2 Data Pipeline**
-Explain how data is collected, processed, and used.
+*Add your architecture diagram here.*
 
-### **3.3 Algorithm / Model Details**
-Use math, pseudocode, or diagrams as needed.
+---
 
-### **3.4 Hardware / Software Implementation**
-Explain equipment, libraries, or frameworks.
+## **3.2 Data Pipeline**
 
-### **3.5 Key Design Decisions & Rationale**
-Describe the main design decisions you made.
+1. Audio → MFCC/Spectrograms (Edge Impulse)  
+2. TinyML classifier on Nicla → label output  
+3. BLE packet (timestamp, label, confidence)  
+4. iOS receives event → logs + updates context buffer  
+5. JITAI engine evaluates prompt decision  
+6. If appropriate → hydration reminder (via chat or notification)
+
+---
+
+## **3.3 Algorithm / Model Details**
+
+- Model: TinyML CNN (keyword spotting style)
+- Classes: keyboard, faucet, background  
+- Features: MFCC (typically 13×frames)  
+- Training pipeline: Edge Impulse  
+- BLE packet format: `"label,confidence,timestamp"`
+
+Decision rules include:
+
+- Skip if user is in a meeting (`CalendarService`)  
+- Skip if last prompt < cooldown  
+- Prefer prompting after faucet events  
+- Prompt after long keyboard streaks + hydration deficit  
+- Maintain quiet hours  
+
+---
+
+## **3.4 Hardware / Software Implementation**
+
+### **Hardware**
+
+- Arduino Nicla Voice  
+- BLE communication module  
+- Laptop/iPhone for development  
+
+### **Software**
+
+- SwiftUI iOS App (Odyssey)  
+- Tabs: AI Chat, Events, Calendar, Hydration  
+- Shared services for state modeling  
+- LLM (OpenAI / local models) for reasoning and surface messaging  
+
+---
+
+## **3.5 Key Design Decisions & Rationale**
+
+- Using **audio** instead of vision to preserve privacy  
+- Performing classification **on-device** to reduce BLE bandwidth  
+- Keeping JITAI decision logic **transparent and rule-based**  
+- Integrating LLM only at the “explanation and interaction layer”  
 
 ---
 
 # **4. Evaluation & Results**
 
-Present experimental results with clarity and professionalism.
+(*Fill these once results are ready—here are placeholders you can update.*)
 
-Include:
+### **4.1 Edge Model Performance**
+- Accuracy per class  
+- Confusion matrix  
+- Latency on Nicla device  
 
-- Plots (accuracy, latency, energy, error curves)  
-- Tables (comparisons with baselines)  
-- Qualitative visualizations (spectrograms, heatmaps, bounding boxes, screenshots)  
-- Ablation studies  
-- Error analysis / failure cases
+### **4.2 BLE Streaming Latency**
+- Average: ~N ms  
+- Worst-case: N ms  
 
-Each figure should have a caption and a short interpretation.
+### **4.3 JITAI Behavior Simulation**
+- % of prompts delivered during meetings → expected low  
+- % delivered during natural breaks → expected high  
+- Prompt spacing consistency  
+
+### **4.4 Qualitative Case Study**
+- Timeline plot: activity vs. prompts vs hydration intake  
+
+*Add figures with captions.*
 
 ---
 
 # **5. Discussion & Conclusions**
 
-Synthesize the main insights from your work.
+Odyssey demonstrates that lightweight sensing + structured reasoning can create **polite, context-aware interventions**. Our system avoids interrupting users during meetings and encourages hydration during natural break points. Although the rule-based logic is simple, our results show the feasibility of combining edge ML, BLE, and LLM reasoning into a cohesive JITAI system.
 
-- What worked well and why?  
-- What didn’t work and why?  
-- What limitations remain?  
-- What would you explore next if you had more time?  
+Remaining limitations include noisy audio environments, limited personalization, and lack of long-term behavioral studies.
 
-This should synthesize—not merely repeat—your results.
+Future improvements:
+
+- Adaptive thresholds based on user response  
+- Additional sensor modalities  
+- Pure on-device LLMs for private, offline reasoning  
+- Extension to other wellness interventions  
 
 ---
 
 # **6. References**
 
-Provide full citations for all sources (academic papers, websites, etc.) referenced and all software and datasets uses.
+*(Fill with real citations later.)*
+
+- JITAI survey papers  
+- Edge Impulse documentation  
+- TinyML literature  
+- Interruptibility detection studies  
 
 ---
 
@@ -154,45 +246,22 @@ Provide full citations for all sources (academic papers, websites, etc.) referen
 
 ## **7.a. Datasets**
 
-Describe each dataset:
-* Source and URL
-* Data format
-* Preprocessing steps
-* Labeling/annotation efforts
+- Keyboard dataset: recorded manually  
+- Faucet dataset: mixed household recordings  
+- Background dataset: filler ambient noise  
+- Processing: WAV normalization → MFCC extraction  
 
-Include your internal dataset if you collected one.
 ## **7.b. Software**
 
-List:
-* External libraries or models
-* Internal modules you wrote
-* Links to repos or documentation
+- Nicla firmware + TinyML model  
+- SwiftUI app (Odyssey):  
+  - `ConversationManager`  
+  - `HydrationService`  
+  - `ContextService`  
+  - `CalendarService`  
+- BLE event logger  
 
 ---
 
-> [!NOTE] 
-> Read and then delete the material from this line onwards.
-
-# 🧭 **Guidelines for a Strong Project Website**
-
-- Include multiple clear, labeled figures in every major section.  
-- Keep the writing accessible; explain acronyms and algorithms.  
-- Use structured subsections for clarity.  
-- Link to code or datasets whenever possible.  
-- Ensure reproducibility by describing parameters, versions, and preprocessing.  
-- Maintain visual consistency across the site.
-
----
-
-# 📊 **Minimum vs. Excellent Rubric**
-
-| **Component**        | **Minimum (B/C-level)**                                         | **Excellent (A-level)**                                                                 |
-|----------------------|---------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| **Introduction**     | Vague motivation; little structure                             | Clear motivation; structured subsections; strong narrative                                |
-| **Related Work**     | 1–2 citations; shallow summary                                 | 5–12 citations; synthesized comparison; clear gap identification                          |
-| **Technical Approach** | Text-only; unclear pipeline                                  | Architecture diagram, visuals, pseudocode, design rationale                               |
-| **Evaluation**       | Small or unclear results; few figures                          | Multiple well-labeled plots, baselines, ablations, and analysis                           |
-| **Discussion**       | Repeats results; little insight                                | Insightful synthesis; limitations; future directions                                      |
-| **Figures**          | Few or low-quality visuals                                     | High-quality diagrams, plots, qualitative examples, consistent style                      |
-| **Website Presentation** | Minimal formatting; rough writing                           | Clean layout, good formatting, polished writing, hyperlinks, readable organization        |
-| **Reproducibility**  | Missing dataset/software details                               | Clear dataset description, preprocessing, parameters, software environment, instructions   |
+*(Template source: UCLA ECEM202A project site template)  
+:contentReference[oaicite:1]{index=1}
