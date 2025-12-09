@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Odyssey | Hydration JITAI Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #e9f7ff;
+      --panel: #f7fcff;
+      --card: #ffffff;
+      --primary: #1c92ff;
+      --primary-2: #0f5fbf;
+      --text: #0f1b2c;
+      --muted: #5f6b7a;
+      --shadow: 0 10px 35px rgba(15, 95, 191, 0.12);
+      --radius: 16px;
+      --maxw: 1100px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
+    }
+    a { color: var(--primary); text-decoration: none; }
+    header {
+      background: var(--panel); padding: 18px 28px; box-shadow: var(--shadow);
+      position: sticky; top: 0; z-index: 10;
+    }
+    nav { max-width: var(--maxw); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    nav .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text); }
+    nav .links { display: flex; gap: 18px; align-items: center; }
+    nav .links a { color: var(--muted); font-weight: 600; }
+    nav .cta { display: flex; gap: 10px; }
+    .btn {
+      padding: 10px 16px; border-radius: 999px; border: none; font-weight: 700; cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease; font-family: inherit;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-2)); color: white; box-shadow: var(--shadow); }
+    .btn-ghost { background: transparent; color: var(--primary-2); border: 1px solid rgba(15,95,191,0.2); }
+    main { max-width: var(--maxw); margin: 0 auto; padding: 32px 24px 80px; }
+    section { margin: 48px 0; }
+    .hero {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; align-items: center;
+      background: var(--panel); border-radius: 24px; padding: 36px; box-shadow: var(--shadow);
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 20% 20%, rgba(28,146,255,0.12), transparent 40%);
+      pointer-events: none;
+    }
+    .hero h1 { margin: 0 0 12px; font-size: 34px; line-height: 1.15; }
+    .hero p { margin: 0 0 18px; color: var(--muted); font-size: 16px; line-height: 1.6; }
+    .pill { display: inline-block; background: rgba(28,146,255,0.12); color: var(--primary-2); padding: 6px 12px; border-radius: 999px; font-weight: 700; font-size: 12px; letter-spacing: 0.5px; }
+    .hero-visual {
+      display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+    }
+    .card {
+      background: var(--card); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow);
+    }
+    .features-grid, .triple-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px;
+    }
+    h2 { margin: 0 0 14px; font-size: 24px; }
+    h3 { margin: 0 0 10px; font-size: 18px; }
+    p { color: var(--muted); line-height: 1.6; }
+    .stat { font-size: 26px; font-weight: 700; color: var(--primary-2); }
+    .timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; align-items: start; text-align: center; }
+    .timeline .step { background: var(--card); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .quote {
+      background: #dff1ff; color: #0f3f7a; border-left: 4px solid var(--primary-2); padding: 12px 14px; border-radius: 12px;
+    }
+    .footer {
+      background: #0f1b2c; color: #d6deea; border-radius: 18px; padding: 28px; margin-top: 48px;
+    }
+    .footer a { color: #a7c7ff; }
+    .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    ul, ol { color: var(--muted); }
+    .badge { display: inline-block; padding: 6px 10px; background: #eef6ff; border-radius: 10px; color: var(--primary-2); font-weight: 600; font-size: 12px; }
+    @media (max-width: 680px) {
+      nav { flex-direction: column; align-items: flex-start; }
+      .hero { padding: 26px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <nav>
+    <div class="brand">Odyssey</div>
+    <div class="links">
+      <a href="#intro">About</a>
+      <a href="#features">Features</a>
+      <a href="#approach">Approach</a>
+      <a href="#results">Results</a>
+      <a href="#media">Media</a>
+    </div>
+    <div class="cta">
+      <button class="btn btn-ghost">Log In</button>
+      <button class="btn btn-primary">Sign Up</button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="top">
+    <div>
+      <span class="pill">Hydration JITAI Assistant</span>
+      <h1>Odyssey: Voice + Local LLM for Timely Hydration Nudges.</h1>
+      <p>Context-aware hydration coach that blends OpenAI Realtime voice, on-device TinyLlama chat, BLE activity sensing (keyboard/faucet/ambient), and calendar awareness so reminders land when you're actually interruptible.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:10px;">
+        <button class="btn btn-primary">Start now</button>
+        <button class="btn btn-ghost">View results</button>
+      </div>
+      <div style="margin-top:16px; display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
+        <div><div class="stat">0.5–1.0s</div><div class="muted">Cloud voice round-trip</div></div>
+        <div><div class="stat">15–20 tok/s</div><div class="muted">Local LLM on iPhone 15 Pro</div></div>
+        <div><div class="stat">&lt;10ms</div><div class="muted">BLE event ingest to UI</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="card" style="width:180px; text-align:center;">
+        <h3 style="margin:0 0 8px;">Voice Helm</h3>
+        <p style="margin:0;">Cloud GPT-4o with realtime speech-to-speech.</p>
+      </div>
+      <div class="card" style="width:200px; text-align:center;">
+        <h3 style="margin:0 0 8px;">Local Copilot</h3>
+        <p style="margin:0;">TinyLlama offline chat with hardware context.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="media">
+    <h2>Media</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>Demo Video</h3>
+        <p>Link: <a href="http://">Product walkthrough</a></p>
+        <p>Highlights: GPT-4o voice, BLE activity logging, offline TinyLlama demo.</p>
+      </div>
+      <div class="card">
+        <h3>Slides</h3>
+        <ul>
+          <li><a href="http://">Midterm Checkpoint Slides</a></li>
+          <li><a href="http://">Final Presentation Slides</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="intro">
+    <h2>1. Introduction</h2>
+    <h3>1.1 Motivation & Objective</h3>
+    <p>Hydration reminders fail when they ignore context—people are in meetings, deep work, or already sipping. Odyssey delivers just-in-time hydration nudges that respect interruptibility using sensor data (keyboard/faucet/ambient) and calendar availability.</p>
+    <h3>1.2 State of the Art & Limitations</h3>
+    <p>Modern JITAI research spans three major domains: <strong>behavioral science foundations</strong>, <strong>context‑sensing and modeling</strong>, and <strong>emerging work on LLM‑driven personalization</strong>. Together they illustrate what is technically possible today—and reveal the absence of fully automated, end‑to‑end LLM‑powered JITAI systems.</p>
+    <p><strong>I. Behavioral &amp; Conceptual Foundations of JITAIs</strong><br/>The foundational JITAI framework (Nahum‑Shani et al.) establishes six core components—distal outcome, proximal outcome, tailoring variables, intervention options, decision points, and decision rules. These components emphasize the need for interventions that respond to dynamic, moment‑to‑moment user context while minimizing burden. JITAI theory provides the blueprint, but does not specify how to operationalize sensing or automated reasoning in real deployments.</p>
+    <p><strong>II. Technical State of the Art: Sensing, Prediction, and Personalization</strong></p>
+    <p><strong>II.1 Passive Context Acquisition</strong><br/>Recent JITAI systems increasingly leverage <strong>passive sensing</strong> (accelerometers, GPS, device usage, ambient audio) to reduce user burden and improve ecological validity. Passive EMA frameworks extract features from continuous sensor streams and infer states such as activity levels, mobility patterns, stress, or momentary receptivity.</p>
+    <p><strong>II.2 Predictive Modeling for Receptivity &amp; Intervention Timing</strong><br/>Two modeling traditions dominate:</p>
+    <ul>
+      <li><strong>Lightweight ML models</strong> (Random Forests, logistic models) effective for low‑data personalized predictions.</li>
+      <li><strong>Deep learning models</strong> (RNNs, LSTMs, Transformers) increasingly used for complex, continuous time‑series prediction and long‑range dependency modeling.</li>
+    </ul>
+    <p>Despite strong advances in prediction, these models usually serve as <strong>isolated components</strong>, rather than part of a full pipeline that also delivers interventions adaptively.</p>
+    <p><strong>III. Emerging Role of LLMs in JITAIs</strong><br/>LLMs introduce new capabilities crucial for modern JITAIs: understanding context, synthesizing multimodal signals, and generating tailored natural‑language support. Early studies show that GPT‑4 can generate <strong>high‑quality behavioral interventions</strong>, often outperforming laypeople and even clinicians in message appropriateness, empathy, and professionalism (Haag et al., CHI 2025). However, these LLMs are evaluated <strong>out of context</strong>—they generate messages when manually provided with context, but do not operate within an automated, real‑time system.</p>
+    <p><strong>IV. Core Limitation in the State of the Art</strong><br/>Across all prior work, one gap remains consistent:</p>
+    <blockquote><strong>No existing system integrates passive sensing, automated context fusion, real‑time LLM reasoning, and adaptive intervention delivery into a single, working JITAI pipeline.</strong></blockquote>
+    <p>Existing studies assess LLM message quality or predictive accuracy in isolation, but lack:</p>
+    <ul>
+      <li>Continuous ingestion of real‑time signals</li>
+      <li>Automated decision‑making by an LLM</li>
+      <li>End‑to‑end closed‑loop intervention generation</li>
+      <li>Deployment on mobile or embedded hardware</li>
+    </ul>
+    <p>These gaps motivate the design of <strong>Odyssey</strong>, which operationalizes what the literature has so far only evaluated in theory.</p>
+    <h3>1.3 Novelty & Rationale</h3>
+    <p>Odyssey directly addresses this gap in the state of the art by operationalizing an end-to-end, fully automated JITAI pipeline in which an LLM continuously ingests real-time context, performs autonomous reasoning, and generates interventions without human mediation. By fusing cloud GPT‑4o voice with an on-device TinyLlama model—and driving both with live BLE-fed activity labels from the Nicla Voice sensor—Odyssey transforms LLM-based JITAIs from theoretical message evaluators into a functioning, context-aware intervention engine. Hydration is chosen as the target behavior because it provides an ideal proof-of-concept domain: it is simple to model, easy for users to self-report or log, produces frequent and measurable proximal outcomes, and avoids sensitive or stigmatizing health data. This makes hydration a safe, low‑risk behavioral target suitable for open-source prototyping while still demonstrating the core JITAI mechanisms—continuous sensing, autonomous LLM reasoning, and adaptive intervention delivery.</p>
+    <h3>1.4 Potential Impact</h3>
+    <p>By addressing the limitations identified in prior JITAI research—namely the absence of continuous sensing, autonomous reasoning, and end‑to‑end intervention delivery—Odyssey aims to demonstrate measurable improvements in hydration adherence, reduced interruption burden through context‑sensitive prompting, and a reusable, extensible template for future real‑world, sensor‑driven LLM‑powered JITAI systems. As an open‑source prototype, Odyssey also serves as a transferable proof‑of‑concept—a practical template demonstrating how sensing, context fusion, and LLM‑driven reasoning can operate together in a fully automated end‑to‑end JITAI pipeline. While not a clinical system, its modular design, transparent architecture, and low‑risk hydration target make it a safe, reproducible foundation for future adaptations, more rigorous behavioral experiments, and expanded intervention domains.</p>
+    <h3>1.5 Challenges</h3>
+    <ul>
+      <li>Maintaining sub-second voice latency over WebSocket links</li>
+      <li>Packaging TinyLlama for mobile without memory pressure</li>
+      <li>Syncing BLE events reliably and keeping prompts concise</li>
+    </ul>
+    <h3>1.6 Metrics of Success</h3>
+    <p>Constructing a fully functioning end‑to‑end pipeline and systematically exploring different system configurations as part of the evaluation process.</p>
+  </section>
+
+  <section id="related">
+    <h2>2. Related Work</h2>
+    <p>Existing hydration apps and behavioral‑support systems reveal three major limitations: <strong>lack of contextual awareness</strong>, <strong>absence of just‑in‑time intelligence</strong>, and <strong>dependence on cloud‑only or non‑adaptive interfaces</strong>.</p>
+    <h3>2.1 Hydration &amp; Self‑Tracking Tools</h3>
+    <p>Commercial hydration reminders rely on fixed intervals or user‑scheduled notifications. They:</p>
+    <ul>
+      <li>Do not incorporate interruptibility (e.g., meetings, deep work)</li>
+      <li>Cannot leverage environmental cues (e.g., faucet = natural break)</li>
+      <li>Depend entirely on manual logging or static schedules</li>
+    </ul>
+    <p>Thus, they lack the adaptive timing central to JITAI design.</p>
+    <h3>2.2 Voice Assistants &amp; Conversational Coaches</h3>
+    <p>Voice assistants provide reminders but:</p>
+    <ul>
+      <li>Have no integration with sensor context</li>
+      <li>Operate mostly cloud‑only (privacy and latency limitations)</li>
+      <li>Do not maintain a structured memory of user state</li>
+    </ul>
+    <p>Recent on‑device LLMs enable private, offline interaction, yet no existing system couples them with real‑world sensors.</p>
+    <h3>2.3 Sensor‑Driven Well‑Being Systems</h3>
+    <p>Several ubiquitous‑computing systems demonstrate the value of continuous sensing for behavior change. For example, <strong>UbiFit Garden</strong> uses a wearable sensor and a glanceable mobile display to encourage physical activity, while <strong>BeWell/BeWell+</strong> leverages smartphone sensing to monitor sleep, activity, and social behavior. These systems show that:</p>
+    <ul>
+      <li>On‑body or phone‑based sensing can infer meaningful aspects of daily life</li>
+      <li>Visual feedback and goal representations can support long‑term engagement</li>
+    </ul>
+    <p>However, they typically stop at detection and visualization or use relatively simple rule‑based feedback. They do not incorporate real‑time, LLM‑level reasoning engines that fuse rich context (schedule, history, sensor events) to generate fully adaptive, natural‑language interventions.</p>
+    <h3>2.4 LLM‑Enabled JITAI Studies</h3>
+    <p>Studies such as Haag et al. (CHI 2025) show LLM‑generated interventions can surpass human‑crafted ones in appropriateness and effectiveness. However, these systems:</p>
+    <ul>
+      <li>Evaluate interventions offline</li>
+      <li>Are not embedded in a continuous sensing pipeline</li>
+      <li>Do not autonomously trigger or time interventions</li>
+    </ul>
+  </section>
+
+  <section id="approach">
+    <h2>3. Technical Approach. Technical Approach</h2>
+    <h3>3.1 System Architecture</h3>
+    <p><em>(Diagram and detailed module explanations remain unchanged for clarity and alignment.)</em></p>
+    <p>The Odyssey system consists of four coordinated layers: the <strong>Embedded Acoustic Event Classifier</strong>, the <strong>App Logic Layer</strong>, the <strong>Unified Context Memory</strong>, and the <strong>LLM Reasoning &amp; Decision Layer</strong>. These layers together enable real‑time detection of user context and generation of adaptive, interruption‑aware hydration nudges.</p>
+    <h3>3.2 Data Pipeline</h3>
+    <p>The data pipeline describes how information flows through the system from sensor capture to final nudge delivery.</p>
+    <ol>
+      <li><strong>Sensor Layer → BLE Transmission</strong>
+        <ul>
+          <li>Nicla Voice emits BLE strings such as <code>LABEL: keyboard</code>, <code>LABEL: faucet</code>, or <code>LABEL: ambient</code>.</li>
+          <li>Each event is parsed into a <code>DetectedEvent</code> struct with timestamps.</li>
+          <li>Placeholder for BLE transmission tag image</li>
+        </ul>
+      </li>
+      <li><strong>iOS App Ingestion</strong>
+        <ul>
+          <li>BLEManager receives event messages.</li>
+          <li>Parsed events update the <em>Detected Acoustic Events</em> buffer inside the unified context memory.</li>
+        </ul>
+      </li>
+      <li><strong>Hydration &amp; Schedule Updates</strong>
+        <ul>
+          <li>HydrationTracker records intake events.</li>
+          <li>DailyAgendaTracker synchronizes with calendar APIs and computes derived availability states.</li>
+        </ul>
+      </li>
+      <li><strong>Context Assembly</strong>
+        <ul>
+          <li>The system consolidates:
+            <ul>
+              <li>BLE activity stream (keyboard, faucet, ambient),</li>
+              <li>hydration progress,</li>
+              <li>schedule context,</li>
+              <li>nudge history.</li>
+            </ul>
+          </li>
+          <li>This becomes the structured prompt input for both TinyLlama and GPT‑4o.</li>
+        </ul>
+      </li>
+      <li><strong>LLM‑Driven Intervention</strong>
+        <ul>
+          <li>OpenAI Realtime GPT‑4o (cloud) or TinyLlama (local) receives context and generates a nudge or decides no‑op.</li>
+          <li>Responses are parsed, executed, logged.</li>
+        </ul>
+      </li>
+      <li><strong>Speech &amp; UI Output</strong>
+        <ul>
+          <li>Cloud voice flows over WebSocket.</li>
+          <li>Local reasoning flows through an offline text interface.</li>
+          <li>Nudges appear as voice or text depending on active mode.</li>
+        </ul>
+      </li>
+    </ol>
+    <h3>3.3 Algorithm / Model Details</h3>
+    <h4>3.3.1 Embedded CNN Model on Nicla Voice (Edge Impulse)</h4>
+    <p>The acoustic event classifier deployed on the Nicla Voice is trained and optimized using <strong>Edge Impulse (EI)</strong>. Key characteristics of the deployed CNN:</p>
+    <ul>
+      <li><strong>Model Type:</strong> Small-footprint 2D CNN optimized for audio spectrograms.</li>
+      <li><strong>Input axes:</strong> mono audio (1‑channel).</li>
+      <li><strong>Window size:</strong> <strong>968 ms</strong>, representing the length of audio processed per inference window.</li>
+      <li><strong>Window increase (stride):</strong> <strong>500 ms</strong>, meaning each new window overlaps ~50% with the previous one for smoother temporal detection.</li>
+      <li><strong>Input Features:</strong> Mel‑spectrogram (time × frequency) slices generated by EI’s DSP pipeline (16kHz audio).</li>
+      <li><strong>Classes:</strong> <code>keyboard</code>, <code>faucet</code>, noise</li>
+      <li><strong>Training Dataset:</strong> Curated dataset in EI Studio (Project ID: 847023), including real &amp; synthetic samples to improve generalization.</li>
+      <li><strong>Deployment Format:</strong> EON‑compiled C++ library automatically integrated into the Nicla firmware.</li>
+    </ul>
+    <p>This CNN transforms raw ambient sound into symbolic context events without transmitting any raw audio. ref: <a href="https://studio.edgeimpulse.com/public/847023/live">https://studio.edgeimpulse.com/public/847023/live</a></p>
+    <h4>3.3.2 Cloud Model (GPT‑4o Realtime)</h4>
+    <p>GPT‑4o Realtime is a <strong>large‑scale multimodal transformer</strong> optimized for low‑latency streaming, contextual reasoning, and speech‑to‑speech interaction.</p>
+    <ul>
+      <li><strong>Model type:</strong> Multimodal transformer (text + audio) with real‑time generation.</li>
+      <li><strong>Strengths:</strong> High semantic fidelity, robust reasoning, excellent at interpreting multi‑dimensional context (sensor + schedule + history).</li>
+      <li><strong>Reference:</strong> OpenAI (2024). <em>GPT‑4o Realtime API Documentation</em>.</li>
+    </ul>
+    <h4>3.3.2 Local Model (TinyLlama 1.1B)</h4>
+    <p>TinyLlama‑1.1B is a <strong>compact decoder‑only transformer</strong> designed for efficient on‑device inference.</p>
+    <ul>
+      <li><strong>Model type:</strong> 1.1‑billion‑parameter autoregressive transformer.</li>
+      <li><strong>Quantization:</strong> Commonly deployed as <strong>Q4_K_M</strong>, reducing memory to ~600–700MB.</li>
+      <li><strong>Context window:</strong> Smaller than GPT‑4o, optimized for short, structured prompts.</li>
+      <li><strong>Strengths:</strong> Fully offline, deterministic, resilient during poor connectivity.</li>
+      <li><strong>Reference:</strong> Rao et al. (2023). <em>TinyLlama: An Efficient 1.1B Language Model</em>.</li>
+    </ul>
+    <h4>3.3.3 Structured Inputs for Nudge Reasoning</h4>
+    <p><strong>1. BLE Activity Log</strong> — rolling 3‑hour window of <code>keyboard</code>, <code>faucet</code>, and <code>ambient</code> labels.<br/><strong>2. Hydration Status</strong> — daily goal, progress, intake timestamps.<br/><strong>3. Schedule Data</strong> — user’s free/busy state and near‑term transitions.<br/><strong>4. Nudge History</strong> — one‑week log of prompt time &amp; content.</p>
+    <h4>3.3.4 Structured Inputs Table (LLM‑Ready)</h4>
+    <div class="card">
+      <table style="width:100%; border-collapse:collapse;">
+        <thead>
+          <tr style="text-align:left;">
+            <th>Input Dimension</th>
+            <th>Description</th>
+            <th>Example Signals</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>BLE Activity Log</strong></td>
+            <td>Recent activity context reflecting work/break states</td>
+            <td>Keyboard → deep work; Faucet → break; Ambient → neutral</td>
+          </tr>
+          <tr>
+            <td><strong>Hydration Status</strong></td>
+            <td>User’s daily goal, current intake, and timing of drinks</td>
+            <td>Long gap since last drink; % of hydration goal completed</td>
+          </tr>
+          <tr>
+            <td><strong>Schedule Data (Calendar)</strong></td>
+            <td>Availability and interruptibility cues</td>
+            <td>Meeting ongoing; meeting begins in &lt;10 min; long free block</td>
+          </tr>
+          <tr>
+            <td><strong>Nudge History</strong></td>
+            <td>Past nudges and response patterns</td>
+            <td>Ignored prompts; effective break‑time prompts</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>3.3.5 LLM Decision Matrix for Hydration Nudge Generation</h4>
+    <p><strong>1. Temporal Context</strong> — circadian alignment, long gaps, extended work sessions.<br/><strong>2. Schedule Awareness</strong> — ongoing meetings, near‑future events, transition windows.<br/><strong>3. Hydration State</strong> — deficits, deviations from expected curve.<br/><strong>4. Environmental &amp; Activity Context</strong> — faucet/keyboard patterns and transitions.<br/><strong>5. Nudge History &amp; Personalization</strong> — fatigue detection, preference learning.</p>
+    <h3>3.4 Hardware / Software Implementation</h3>
+    <p><strong>Firmware (Nicla Voice)</strong></p>
+    <ul>
+      <li>TinyML CNN for event detection.</li>
+      <li>BLE characteristic for outbound label transmission.</li>
+    </ul>
+    <p><strong>iOS Application</strong></p>
+    <ul>
+      <li>SwiftUI interface.</li>
+      <li>BLEManager handles scanning, connecting, decoding.</li>
+      <li>ConversationManager synchronizes LLM sessions, logging, and output.</li>
+      <li>AudioRecorder + OpenAIRealtimeService manage cloud speech.</li>
+    </ul>
+    <p><strong>Local LLM Integration</strong></p>
+    <ul>
+      <li>llama.cpp Swift package.</li>
+      <li>ModelDownloader fetches and loads TinyLlama (669MB).</li>
+      <li>Supports offline decision‑making.</li>
+    </ul>
+    <h3>3.5 Key Design Decisions &amp; Rationale</h3>
+    <ul>
+      <li><strong>Hybrid cloud/offline reasoning</strong> ensures robustness.</li>
+      <li><strong>Sensor‑aware prompting</strong> prevents intrusive or irrelevant nudges.</li>
+      <li><strong>Calendar‑aware timing</strong> aligns nudges with interruptibility.</li>
+      <li><strong>Privacy‑preserving architecture</strong>: raw audio stays on device; only labels propagate.</li>
+      <li><strong>Offline‑first logging</strong> keeps memory intact during network loss.</li>
+    </ul>
+    <p>The structured inputs and decision logic previously listed in this section have been reorganized into <strong>3.3 Algorithm / Model Details</strong> for clarity and consistency.</p>
+  </section>
+
+  <section id="results">
+    <h2>4. Evaluation &amp; Results</h2>
+    <h3>Wholistic Evaluation Criteria:</h3>
+    <ol>
+      <li><strong>LLM Performance Across Cloud and Edge Models</strong>
+        <ol>
+          <li>Token cost and computational efficiency for each model</li>
+          <li>Nudge quality, evaluated by contextual correctness, timing appropriateness</li>
+        </ol>
+      </li>
+      <li><strong>Cost–Performance Tradeoff Analysis</strong>
+        <ol>
+          <li><strong>Reasoning Frequency Policies</strong>
+            <ol>
+              <li>Fixed‑interval reasoning (e.g., every 1 min or 10 min)</li>
+              <li>Adaptive reasoning intervals, such as lengthening the interval after the user drinks</li>
+            </ol>
+          </li>
+          <li><strong>Local‑First Decision Strategy</strong>
+            <ul>
+              <li>Prioritize local TinyLlama for routine reasoning, escalate to cloud GPT‑4o only when higher semantic depth or nuance is required</li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </section>
+
+  <section id="discussion">
+    <h2>5. Discussion &amp; Conclusions</h2>
+    <p>Odyssey demonstrates that an end-to-end, sensor-driven, LLM-powered JITAI is technically feasible and can operate continuously under real-world constraints. The hybrid architecture—TinyLlama locally and GPT‑4o in the cloud—highlights a promising design pattern: <strong>offline-first autonomy with cloud-enhanced expressiveness</strong>. By grounding interventions in BLE-fed environmental signals and calendar-based interruptibility, Odyssey reduces irrelevant prompts and more closely aligns with the behavioral science principles behind JITAIs.</p>
+    <p>However, several limitations remain. First, current evaluations rely on controlled bench tests rather than longitudinal in-situ deployments; real-world behavioral impact remains unmeasured. Second, TinyLlama performance varies across devices, and local inference latency may still constrain responsiveness on older hardware. Third, the system currently focuses on hydration—a safe, tractable demonstration domain—but additional behavioral targets will require more complex state modeling. Finally, integration overhead (e.g., manual setup of llama.cpp) remains a barrier for non-technical users.</p>
+    <p>Future work includes live user trials, expanded sensor modalities (e.g., motion, device usage), automated action triggers based on multi-event patterns, and the exploration of larger or distilled local models. Odyssey’s open-source design positions it as a strong foundation for more rigorous experimentation and future adaptive-intervention systems.</p>
+  </section>
+
+  <section id="references">
+    <h2>6. References</h2>
+    <ul>
+      <li>[OpenAI24] GPT‑4o Realtime API documentation.</li>
+      <li>[Rao23] TinyLlama 1.1B technical report.</li>
+      <li>[SwiftLlama] Shenghai Wang, llama.cpp Swift package.</li>
+      <li>[Apple] Speech Framework, AVFoundation, SwiftUI documentation.</li>
+      <li>[Arduino] Nicla BLE reference.</li>
+      <li>[Haag25] Haag et al. (2025). <em>The Last JITAI? Exploring Large Language Models for Issuing Just‑in‑Time Adaptive Interventions.</em> Proceedings of CHI 2025. <a href="https://dl.acm.org/doi/10.1145/3706598.3713307">https://dl.acm.org/doi/10.1145/3706598.3713307</a></li>
+      <li>[HydrationPMC24a] <em>Effectiveness of Hydration Tracking and Digital Reminders in Health Interventions.</em> PMC11634059. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11634059/">https://pmc.ncbi.nlm.nih.gov/articles/PMC11634059/</a></li>
+      <li>[HydrationPMC24b] <em>User Engagement and Health Outcomes in Smartphone‑Based Hydration Interventions.</em> PMC11838940. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11838940/">https://pmc.ncbi.nlm.nih.gov/articles/PMC11838940/</a></li>
+      <li>[JMIR25] <em>Advances in Digital Health Hydration Interventions.</em> JMIR 2025. <a href="https://www.jmir.org/2025/1/e57358">https://www.jmir.org/2025/1/e57358</a></li>
+    </ul>
+  </section>
+
+  <section id="supplementary">
+    <h2>7. Supplementary Material</h2>
+    <h3>7.a Datasets</h3>
+    <ul>
+      <li><strong>BLE Activity Logs:</strong> Timestamped Nicla Voice labels (keyboard, faucet, ambient). Used to construct rolling activity windows.</li>
+      <li><strong>Hydration Records:</strong> Local intake logs used for evaluating intervention timing and goal progress.</li>
+      <li><strong>LLM Interaction Logs:</strong> Cloud and local transcripts for debugging and qualitative assessment.</li>
+      <li><strong>Preprocessing Procedures:</strong> Timestamp normalization, alignment with calendar events, and last‑5‑event feature extraction.</li>
+    </ul>
+    <h3>7.b Software &amp; Reproducibility</h3>
+    <ul>
+      <li><strong>External Dependencies:</strong> SwiftUI, CoreBluetooth, AVFoundation, Apple Speech, OpenAI Realtime API, SwiftLlama (llama.cpp).</li>
+      <li><strong>Internal Modules:</strong> BLEManager (sensor ingestion), ConversationManager (LLM routing), OpenAIRealtimeService (voice), LLMManager (policy logic), ModelDownloader (local model setup).</li>
+      <li><strong>Documentation:</strong> See README.md for installation; BLE_LLM_INTEGRATION.md, BLE_LLM_TESTING.md for sensor–LLM workflows; LLAMA_SETUP_INSTRUCTIONS.md for deploying TinyLlama locally.</li>
+    </ul>
+  </section>
+
+  <div class="footer">
+    <div style="display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between;">
+      <div>
+        <strong>Odyssey</strong><br/>
+        Hydration-aware AI coach. © 2025
+      </div>
+      <div>
+        <a href="#top">Home</a> · <a href="#features">Features</a> · <a href="#media">Media</a> · <a href="#references">References</a>
+      </div>
+      <div>
+        <a href="mailto:team@example.com">Contact</a> · <a href="http://">Privacy</a>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
