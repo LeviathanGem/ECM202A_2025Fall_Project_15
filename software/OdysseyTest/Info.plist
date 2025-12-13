@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key></key>
+	<false/>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Odyssey Companion uses speech recognition to understand your hydration-related requests.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Odyssey Companion needs microphone access to listen to your voice commands and conversations.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Odyssey Companion uses Bluetooth to connect to your Alexa Nicla device and receive wake word detection events.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Odyssey Companion uses Bluetooth to connect to your Alexa Nicla device and receive wake word detection events.</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict/>
+	</array>
+</dict>
+</plist>

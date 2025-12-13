@@ -1,0 +1,28 @@
+//
+//  Config.swift.template
+//  OdysseyTest
+//
+//  Configuration template for API keys and secrets
+//
+
+import Foundation
+
+/// Configuration for OpenAI API
+enum Config {
+    /// Your OpenAI API key
+    /// Get one at: https://platform.openai.com/api-keys
+    static let apiKey = "YOUR_OPENAI_API_KEY_HERE"
+    
+    /// Check if API key is configured
+    static var isAPIKeyConfigured: Bool {
+        return !apiKey.isEmpty && 
+               apiKey != "YOUR_OPENAI_API_KEY_HERE" && 
+               !apiKey.hasPrefix("sk-proj-")
+    }
+}
+
+// IMPORTANT: 
+// 1. Copy this file to "Config.swift" (remove .template)
+// 2. Replace YOUR_OPENAI_API_KEY_HERE with your actual API key
+// 3. NEVER commit Config.swift to git (it's in .gitignore)
+
