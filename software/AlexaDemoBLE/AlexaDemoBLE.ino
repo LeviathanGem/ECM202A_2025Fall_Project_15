@@ -44,6 +44,9 @@ void ledBlueOn(char* label) {
   nicla::leds.setColor(off);
   
   // Send notification via BLE if connected
+  // Expected labels from Edge Impulse model: 
+  // - "potential_focus_happening" (deep work/keyboard activity)
+  // - "potential_break_happening" (break time/faucet sounds)
   if (isConnected) {
     String message = "MATCH: ";
     message += label;
@@ -141,7 +144,8 @@ void setup() {
   Serial.println("🎤 Configuring microphone...");
   NDP.turnOnMicrophone();
   NDP.interrupts();
-  Serial.println("✅ Ready! Say 'Alexa' to test.");
+  Serial.println("✅ Ready! Listening for acoustic events...");
+  Serial.println("📊 Expected labels: potential_focus_happening, potential_break_happening");
 
   // For maximum low power; please note that it's impossible to print after calling these functions
   nicla::leds.end();
